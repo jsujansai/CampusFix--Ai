@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User profiles, roles, student details, points and badges",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "rollNumber": { "type": "string" },
+        "gender": { "type": "string", "enum": ["Male", "Female"] },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "points": { "type": "number" },
+        "badges": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "Campus problem reports and maintenance issues",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "location": { "type": "string" },
+        "building": { "type": "string" },
+        "roomOrArea": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Urgent"] },
+        "status": { "type": "string", "enum": ["Pending", "Under Review", "Assigned", "In Progress", "Resolved", "Rejected"] },
+        "reporterId": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "reporterEmail": { "type": "string" },
+        "reporterAvatar": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "assignedDepartment": { "type": "string" },
+        "assignedStaff": { "type": "string" },
+        "expectedResolutionDays": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "resolvedAt": { "type": "string" },
+        "timeline": { "type": "array" },
+        "comments": { "type": "array" }
+      },
+      "required": ["id", "title", "category", "description", "location", "status", "priority", "reporterId", "createdAt"]
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Campus maintenance alerts and status change notifications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "reportId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["info", "success", "warning", "urgent"] },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "message", "type", "isRead", "createdAt"]
+    },
+    "departments": {
+      "title": "Departments",
+      "description": "Campus facilities and maintenance administrative units",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "head": { "type": "string" },
+        "contact": { "type": "string" },
+        "activeStaffCount": { "type": "number" },
+        "openTickets": { "type": "number" },
+        "avgResolutionHours": { "type": "number" },
+        "performanceScore": { "type": "number" }
+      },
+      "required": ["id", "name"]
+    }
+  },
+  "firestore": {
+    "collections": {
+      "users": {
+        "schema": "users",
+        "description": "Campus user profiles"
+      },
+      "reports": {
+        "schema": "reports",
+        "description": "Campus incident reports"
+      },
+      "notifications": {
+        "schema": "notifications",
+        "description": "User notification messages"
+      },
+      "departments": {
+        "schema": "departments",
+        "description": "Campus facilities management units"
+      }
+    }
+  }
+}
